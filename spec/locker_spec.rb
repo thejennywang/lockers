@@ -2,41 +2,44 @@ require 'locker'
 require 'bag'
 
 describe 'Locker' do
-  let (:locker) { Locker.new(capacity: 5) }
-  let (:bag) { Bag.new }
+  let (:small_locker)  { Locker.new("small", 1)  }
+  let (:medium_locker) { Locker.new("medium", 2) }
+  let (:large_locker)  { Locker.new("large", 3)  }
+  let (:medium_bag)    { Bag.new("medium")       }
 
-  def fill_locker(locker)
-    locker.capacity.times { locker.lock(bag) }
-  end
-  
-  it 'is created with no bags' do
-    expect(locker).not_to have_bags
+  it 'is created empty' do
+    expect(medium_locker).not_to be_full
   end
 
-  it 'should accept a bag' do
-    locker.lock(bag)
-    expect(locker.bags).to eq [bag]
-    expect(locker.bag_count).to eq 1
+  it 'has a size' do
+    expect(medium_locker.size).to eq "medium"
   end
 
-  it 'should know its own bag count' do
-    expect(locker.bag_count).to eq 0
+  it 'has a ticket_number' do
+    expect(medium_locker.ticket_number).to eq 2
   end
 
-  it 'should release a bag' do
-    locker.lock(bag)
-    locker.release(bag)
-    expect(locker.bag_count).to eq 0
+  it 'can accept a bag' do
+    medium_locker.accept(medium_bag)
+    expect(medium_locker).to be_full
+    expect(medium_locker.bag).to eq medium_bag
   end
 
-  it 'should know when it is full' do
-    expect(locker).not_to be_full
-    fill_locker(locker)
-    expect(locker).to be_full
+  it 'does not accept a bag that is too big' do
+    expect{small_locker.accept(medium_bag)}.to raise_error("This locker ain't big enough!")
   end
 
-  it 'should not accept a bag if at capacity' do
-    fill_locker(locker)
-    expect(lambda {locker.lock(bag)}).to raise_error(RuntimeError)
+  it 'does not accept a bag if it is already full' do
+    medium_locker.accept(medium_bag)
+    expect(medium_locker).to be_full
+    expect{medium_locker.accept(medium_bag)}.to raise_error("This locker is full, fool!")
   end
+
+  it 'can release a bag' do
+    medium_locker.accept(medium_bag)
+    expect(medium_locker).to be_full
+    medium_locker.release_bag
+    expect(medium_locker).not_to be_full
+  end
+
 end
