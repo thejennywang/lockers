@@ -27,6 +27,7 @@ describe 'Concierge' do
 
     it 'can check in a medium bag into a large locker when medium lockers are full' do
       (medium_lockers.length).times {concierge.check_in(medium_bag)}
+      expect(lockers).to_receive(:puts)
       concierge.check_in(medium_bag)
       first_large_locker = concierge.lockers.bsearch {|locker| locker.size == "large"}
       expect(first_large_locker.bag).to eq medium_bag

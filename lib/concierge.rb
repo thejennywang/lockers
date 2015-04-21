@@ -6,9 +6,9 @@ class Concierge
     @lockers ||= []
 
     (0..3000).each do |i| 
-      @lockers[i] = Locker.new("small", i + 1) if i >= 0 && i < 10
-      @lockers[i] = Locker.new("medium", i + 1) if i >= 10 && i < 20
-      @lockers[i] = Locker.new("large", i + 1) if i >= 20 && i < 30
+      @lockers[i] = Locker.new("small", i + 1) if i >= 0 && i < 1000
+      @lockers[i] = Locker.new("medium", i + 1) if i >= 1000 && i < 2000
+      @lockers[i] = Locker.new("large", i + 1) if i >= 2000 && i < 3000
     end 
   end
 

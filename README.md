@@ -24,8 +24,8 @@ $ bag = Bag.new("medium")
 ### To check a bag in, run
 
 $ concierge.check_in(bag) 
-You will receive a ticket number. Remember this number
+You will receive a ticket number. Remember this number.
 
-### To check out a checked bag with your TICKET_NUMBER:
+### To check out a checked bag with your provided TICKET_NUMBER:
 
 $ concierge.check_out(TICKET_NUMBER)
