@@ -4,11 +4,12 @@ require 'locker'
 
 describe 'Concierge' do
 
-  let (:concierge) { Concierge.new     }
+  let (:concierge) { Concierge.new }
 
-  let (:small_bag) { Bag.new("small")  }
-  let (:medium_bag){ Bag.new("medium") }
-  let (:large_bag) { Bag.new("large")  }
+
+  let (:small_bag) { double :small_bag, size: "small" }
+  let (:medium_bag) { double :small_bag, size: "medium" }
+  let (:large_bag) { double :small_bag, size: "large" }
   
   let (:all_available_lockers)    { concierge.lockers.select{ |locker| !locker.full? && locker.acceptable?(small_bag) } }
   let (:medium_lockers)           { concierge.lockers.select{ |locker| locker.size == "medium" }                  }
