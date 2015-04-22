@@ -13,6 +13,7 @@ Go to locker_concierge folder
 ### To start up the concierge program
 
 $ irb
+
 $ require './lib/all'
 
 $ concierge = Concierge.new
