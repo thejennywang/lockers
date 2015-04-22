@@ -4,10 +4,6 @@ require 'locker'
 
 describe 'Concierge' do
 
-  before do
-    allow_any_instance_of(IO).to receive(:puts)
-  end
-
   let (:concierge) { Concierge.new }
 
 

@@ -24,7 +24,7 @@ class Concierge
     if self.find_a_locker_for(bag)
       assigned_locker = self.find_a_locker_for(bag)
       assigned_locker.accept(bag)
-      puts "Your ticket number is #{assigned_locker.ticket_number}."
+      self.print_ticket_with(assigned_locker)
     else
       raise "Uh oh, no more lockers. Sorry."
     end
@@ -38,5 +38,9 @@ class Concierge
     else
       raise "Your ticket number is invalid."
     end
+  end
+
+  def print_ticket_with(assigned_locker)
+    puts "Your ticket number is #{assigned_locker.ticket_number}."
   end
 end
